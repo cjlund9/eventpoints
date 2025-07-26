@@ -1,189 +1,152 @@
-# Ironclad Event Points Bot
+# Discord Event Points Bot
 
-A Discord bot for managing event points, achievements, and a customizable shop system.
+A comprehensive Discord bot for managing event points, competitions, and rewards in gaming communities. Built with Discord.js and SQLite.
 
 ## Features
 
-### Event Points System
-- Manual point awarding by Event Coordinators
-- Event participation points
-- Combat Achievement points (Easy to Grandmaster)
-- Collection Log points (Bronze to Guilded)
-- Event Competition points (1st, 2nd, 3rd place)
-- Custom point awards
-- Personal point tracking
-- Leaderboard system
+### 🏆 Event Points System
+- Track points for various activities and achievements
+- Collection log tier rewards (Bronze to Guilded)
+- Combat achievement points (Easy to Grandmaster)
+- Event competition placements (1st, 2nd, 3rd place)
+- Custom point awards for special events
 
-### Shop System
-- Customizable shop items
-- Role rewards
-- Custom rewards
-- Purchase history
-- Admin management
-- Event staff alerts for choice purchases
+### 🛒 Shop System
+- Purchase items with event points
+- Role-based rewards
+- Special event choices (SOTW, BOTW, COTW)
+- Shop management for administrators
 
-### Event Buy-in System
-- Purchase event participation roles with points
-- Automatic role assignment
-- Participant management
-- Configurable buy-in costs
+### 🎫 Event Management
+- Event buy-ins for participation
+- Entry fees for specific competitions
+- Role assignment for event participants
+- Event coordinator tools
 
-### Entry Fee System
-- Pay entry fees for specific events
-- Automatic role assignment
-- Configurable entry costs
-
-## Setup
-
-1. **Install Dependencies**
-   ```bash
-   npm install
-   ```
-
-2. **Environment Configuration**
-   - Copy `env.example` to `.env`
-   - Fill in your Discord bot token, client ID, and guild ID
-   - Set your Event Coordinator role ID
-   - Configure point values as needed
-   - Set event buy-in costs and role IDs
-   - Set shop item role IDs
-   - Set entry fee role IDs
-
-3. **Deploy Commands**
-   ```bash
-   npm run deploy
-   ```
-
-4. **Set up Shop Items**
-   ```bash
-   # Use the shop-setup command in Discord
-   /shop-setup
-   ```
-
-5. **Start the Bot**
-   ```bash
-   npm start
-   ```
+### 📊 Leaderboards & Statistics
+- Real-time leaderboards
+- User point tracking
+- Activity statistics
+- Point history
 
 ## Commands
 
 ### User Commands
-- `/points [user]` - Check your or another user's event points
+- `/points [user]` - Check your or another user's points
 - `/leaderboard [limit]` - View the event points leaderboard
-- `/shop` - View available shop items
-- `/buy <item_id> [choice]` - Purchase an item from the shop (choice required for SOTW/BOTW/COTW)
-- `/event-buyin <event>` - Purchase event participation role
-- `/entry-fee <event>` - Pay entry fee for events
+- `/shop` - Browse available shop items
+- `/buy <item_id> [choice]` - Purchase items from the shop
+- `/event-buyin <event>` - Purchase event participation
+- `/entry-fee <event>` - Pay entry fees for competitions
 
-### Event Coordinator Commands
-- `/award-event <user> [description]` - Award points for event participation
-- `/award-combat <user> <tier>` - Award points for combat achievements
-- `/award-collection <user> <tier>` - Award points for collection log
-- `/award-competition <user> <event> <placement>` - Award points for event competition
+### Administrator Commands
+- `/award-collection <user> <tier>` - Award collection log points
+- `/award-combat <user> <tier>` - Award combat achievement points
+- `/award-competition <user> <event> <placement>` - Award competition points
 - `/award-custom <user> <points> <description>` - Award custom points
+- `/award-event <user> [description]` - Award event participation points
+- `/shop-add <name> <cost> [description] [role] [custom_reward]` - Add shop items
+- `/shop-remove <item_id>` - Remove shop items
 - `/shop-setup` - Set up default shop items
-- `/shop-add <name> [description] <cost> [role] [custom_reward]` - Add shop item
-- `/shop-remove <item_id>` - Remove shop item
-- `/event-buyin-manage remove-role <user> <event>` - Remove event role from user
-- `/event-buyin-manage list-participants <event>` - List event participants
+- `/event-buyin-manage` - Manage event participants
 
-## Point Values
+## Setup
 
-### Combat Achievements
-- Easy: 10 points
-- Medium: 25 points
-- Hard: 50 points
-- Elite: 75 points
-- Master: 100 points
-- Grandmaster: 200 points
+### Prerequisites
+- Node.js 16.9.0 or higher
+- Discord Bot Token
+- Discord Application with Bot permissions
 
-### Collection Log
-- Bronze: 3 points
-- Iron: 5 points
-- Steel: 10 points
-- Black: 30 points
-- Mithril: 50 points
-- Adamant: 80 points
-- Rune: 90 points
-- Dragon: 100 points
-- Guilded: 200 points
+### Installation
 
-### Event Competitions
-- **Skill of the Week**: 1st (20), 2nd (10), 3rd (5)
-- **Clue of the Month**: 1st (20), 2nd (10), 3rd (5)
-- **Boss of the Week**: 1st (20), 2nd (10), 3rd (5)
-- **General Bingo**: 1st (20), 2nd (5)
-- **Battleship**: 1st (30), 2nd (10)
-- **Mania**: 1st (20), 2nd (10), 3rd (5)
-- **Bounty**: 1st (10), 2nd (5)
+1. **Clone the repository**
+   ```bash
+   git clone <your-repo-url>
+   cd ironclad-event-points
+   ```
 
-### Event Buy-ins
-- **Skill of the Week**: 50 points
-- **Clue of the Month**: 50 points
-- **Boss of the Week**: 50 points
-- **General Bingo**: 50 points
-- **Battleship**: 50 points
-- **Mania**: 50 points
-- **Bounty**: 50 points
+2. **Install dependencies**
+   ```bash
+   npm install
+   ```
 
-### Entry Fees
-- **Bingo Entry**: 5 points
-- **Battleship Entry**: 5 points
-- **CvC Entry**: 20 points
+3. **Configure environment variables**
+   ```bash
+   cp env.example .env
+   ```
+   
+   Edit `.env` with your Discord bot credentials and server settings:
+   - `DISCORD_TOKEN` - Your bot token
+   - `CLIENT_ID` - Your bot's client ID
+   - `GUILD_ID` - Your Discord server ID
+   - Role IDs for various events and permissions
 
-### Shop Items
-- **Choose SOTW**: 50 points
-- **Choose BOTW**: 50 points
-- **Choose COTW**: 50 points
-- **Events Rank**: 1000 points
-- **1 Alt Allowed**: 1000 points
+4. **Deploy slash commands**
+   ```bash
+   node src/utils/deploy-commands.js
+   ```
 
-### Event Participation
-- Default: 10 points (configurable)
+5. **Start the bot**
+   ```bash
+   node src/index.js
+   ```
+
+### Environment Variables
+
+See `env.example` for all available configuration options:
+
+- **Discord Configuration**: Bot token, client ID, guild ID
+- **Database**: SQLite database path
+- **Point Values**: Collection log, combat achievements, event competitions
+- **Event Costs**: Buy-in costs for various events
+- **Role IDs**: Discord role IDs for permissions and rewards
 
 ## Database
 
-The bot uses SQLite to store:
-- User event points
-- Activity history
-- Shop items
-- Purchase history
-
-## Configuration
-
-### Environment Variables
-- `DISCORD_TOKEN` - Your Discord bot token
-- `CLIENT_ID` - Your Discord application client ID
-- `GUILD_ID` - Your Discord server ID
-- `EVENT_COORDINATOR_ROLE_ID` - Role ID for event coordinators
-- `DATABASE_PATH` - Path to the SQLite database file
-
-### Point Values (optional)
-- `EVENT_POINTS_PER_ACTIVITY` - Points for event participation
-- `CUSTOM_POINTS_DEFAULT` - Default custom points
-- `CLOG_*` - Collection log point values
-- `CA_*` - Combat achievement point values
-- `EVENT_*` - Event competition point values
-- `EVENT_*_BUYIN` - Event buy-in costs
-- `EVENT_*_ROLE_ID` - Event participation role IDs
-- `SHOP_*_ROLE_ID` - Shop item role IDs
-- `ENTRY_*_ROLE_ID` - Entry fee role IDs
+The bot uses SQLite for data storage with the following main tables:
+- `users` - User information and point balances
+- `transactions` - Point transaction history
+- `shop_items` - Available shop items
+- `user_roles` - Role assignments and permissions
 
 ## Permissions
 
-The bot requires the following Discord permissions:
+### Required Bot Permissions
 - Send Messages
 - Use Slash Commands
-- Manage Roles (for shop role rewards and event buy-ins)
+- Manage Roles (for role assignments)
 - Read Message History
-- View Channels
+- Embed Links
 
-## Development
+### Role Requirements
+- **Event Coordinator Role**: Required for awarding points and managing events
+- **Event Participation Roles**: Assigned when users buy into events
+- **Shop Role IDs**: For items that grant Discord roles
 
-- `npm run dev` - Start with nodemon for development
-- `npm run deploy` - Deploy slash commands
-- `npm start` - Start the production bot
+## Contributing
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+## License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
 
 ## Support
 
-For issues or questions, please contact the bot administrator. 
+For support and questions:
+- Create an issue in this repository
+- Check the Discord.js documentation
+- Review the environment configuration in `env.example`
+
+## Changelog
+
+### v1.0.0
+- Initial release
+- Complete event points system
+- Shop functionality
+- Event management tools
+- Leaderboard and statistics 
